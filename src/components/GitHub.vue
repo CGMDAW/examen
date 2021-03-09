@@ -3,7 +3,7 @@
         <!-- TODO: Crear componente GitHub -->
 
         <div class="form-group pt-4 pb-2">
-            <input type="text" class="form-control" id="searchBar" v-model="user" aria-describedby="searchBar" @keydown.enter="obtenerUsuario">
+            <input type="text" class="form-control" id="searchBar" v-model="user" aria-describedby="searchBar" @keydown.enter="obtenerUsuario" :readonly="disabled">
         </div>
 
         <div v-if="isError" class="alert alert-warning" role="alert">
@@ -65,8 +65,7 @@ export default {
         obtenerUsuario: function() {
             // Función para obtener los datos de usuario de la API de GitHub
             
-            // Deshabilitar campo de texto
-            this.disabled = true;
+          
 
             // Resetear variable de error
             this.isError = false;
@@ -100,6 +99,8 @@ export default {
                     console.log(this.userData)
                     // Indicamos que el usuario es válido
                     this.validUser = true;
+                      // Deshabilitar campo de texto
+                    this.disabled = true;
                 })
                 .catch(error => {
                     // La petición se ha encontado con un error (posiblemente, usuario inexistente)
